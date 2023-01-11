@@ -1,0 +1,8 @@
+---
+name: example-app
+
+dependencies:
+  - golang-1-linux
+
+files:
+  - example-app/*

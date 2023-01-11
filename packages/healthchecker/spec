@@ -1,0 +1,12 @@
+---
+name: healthchecker
+
+dependencies:
+  - golang-1-linux
+
+files:
+  - code.cloudfoundry.org/go.mod
+  - code.cloudfoundry.org/go.sum
+  - code.cloudfoundry.org/vendor/modules.txt
+  - code.cloudfoundry.org/**/*.go
+  - restart-monit-job

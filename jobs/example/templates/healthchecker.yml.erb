@@ -1,0 +1,19 @@
+<%=
+config = {
+  'component_name' => 'example-healthchecker',
+  'failure_counter_file' => p('healthchecker.failure_counter_file'),
+  'log_level' =>  p('log_level'),
+  'healthcheck_endpoint' => {
+    'host' => p('address'),
+    'port' => p('port'),
+    'path' => '/health',
+  },
+  # Defaults for other params:
+  #'start_response_delay_interval' => '5s',
+  #'startup_delay_buffer' => '5s',
+  #'healthcheck_poll_interval' => '10s',
+  #'healthcheck_timeout' => '5s',
+}
+
+config.to_yaml
+%>

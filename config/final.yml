@@ -1,0 +1,5 @@
+name: healthchecker
+blobstore:
+  provider: gcs
+  options:
+    bucket_name: healthchecker-release-bosh-blobs

@@ -1,0 +1,13 @@
+check process example
+  with pidfile /var/vcap/sys/run/bpm/example/example.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start example"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop example"
+  group vcap
+
+check process example-healthchecker
+  with pidfile /var/vcap/sys/run/bpm/example/example-healthchecker.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start example -p example-healthchecker"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop example -p example-healthchecker"
+  if 1 restarts within 1 cycles then exec "/var/vcap/packages/healthchecker/bin/restart-monit-job example <%= p('healthchecker.failure_counter_file') %>"
+  depends on example
+  group vcap

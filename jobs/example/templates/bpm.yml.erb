@@ -1,0 +1,14 @@
+---
+processes:
+  - name: example
+    executable: /var/vcap/packages/example-app/bin/example-app
+    env:
+      PORT: <%= p("port") %>
+  - name: example-healthchecker
+    executable: /var/vcap/packages/healthchecker/bin/healthchecker
+    args:
+      - -c
+      - /var/vcap/jobs/example/config/healthchecker.yml
+    additional_volumes:
+      - path: <%= File.dirname(p('healthchecker.failure_counter_file')) %>
+        writable: true
