@@ -18,8 +18,8 @@ process downtime.
 ## Implementing in Your BOSH Release
 
 1. Vendor the healthchecker BOSH package in your boshrelease.
-1. Add `<job>-healthchecker` process to your job's monit file, based on our [example monit file]().
-1. Add BPM config for the healthchecker, based on our [example bpm.yml]().
-1. Add a healthchecker config template to your job based on our [example helathchecker config template]().
+1. Add `<job>-healthchecker` process to your job's monit file, based on our [example monit file](https://github.com/cloudfoundry/healthchecker-release/blob/main/jobs/example/monit).
+1. Add BPM config for the healthchecker, based on our [example bpm.yml](https://github.com/cloudfoundry/healthchecker-release/blob/main/jobs/example/templates/bpm.yml.erb).
+1. Add a healthchecker config template to your job based on our [example helathchecker config template](https://github.com/cloudfoundry/healthchecker-release/blob/main/jobs/example/templates/healthchecker.yml.erb).
 1. Update the job's spec to add the healthchecker config template, healthchecker package,
    and any new properties.
