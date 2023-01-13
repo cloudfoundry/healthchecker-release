@@ -9,7 +9,7 @@ import (
 	. "github.com/onsi/gomega"
 	"gopkg.in/yaml.v2"
 
-	"code.cloudfoundry.org/cf-networking-helpers/healthchecker/config"
+	"code.cloudfoundry.org/healthchecker/config"
 )
 
 var _ = Describe("Config", func() {

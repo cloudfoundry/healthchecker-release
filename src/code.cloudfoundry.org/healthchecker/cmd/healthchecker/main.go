@@ -9,8 +9,8 @@ import (
 	"os/signal"
 	"time"
 
-	"code.cloudfoundry.org/cf-networking-helpers/healthchecker/config"
-	"code.cloudfoundry.org/cf-networking-helpers/healthchecker/watchdog"
+	"code.cloudfoundry.org/healthchecker/config"
+	"code.cloudfoundry.org/healthchecker/watchdog"
 	"code.cloudfoundry.org/lager"
 	"code.cloudfoundry.org/lager/lagerflags"
 )

@@ -1,5 +1,3 @@
-code.cloudfoundry.org/cf-networking-helpers v0.0.0-20230109130340-6b038be791db h1:KvpF8DOUYiTPFkxWDorXyQo+XizbVvrQdoVx3sUsUeQ=
-code.cloudfoundry.org/cf-networking-helpers v0.0.0-20230109130340-6b038be791db/go.mod h1:36muY2Ky8MLqVNIjU0ITKNquvE1lcpUw4pNGaTE5xQY=
 code.cloudfoundry.org/lager v2.0.0+incompatible h1:WZwDKDB2PLd/oL+USK4b4aEjUymIej9My2nUQ9oWEwQ=
 code.cloudfoundry.org/lager v2.0.0+incompatible/go.mod h1:O2sS7gKP3HM2iemG+EnwvyNQK7pTSC6Foi4QiMp9sSk=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

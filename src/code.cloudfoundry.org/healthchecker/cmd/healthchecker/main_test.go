@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"code.cloudfoundry.org/cf-networking-helpers/healthchecker/config"
+	"code.cloudfoundry.org/healthchecker/config"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -30,7 +30,7 @@ var HealthCheckerBeforeEach = func() {
 		HealthCheckPollInterval:    1 * time.Millisecond,
 		HealthCheckTimeout:         1 * time.Millisecond,
 	}
-	binPath, err = gexec.Build("code.cloudfoundry.org/cf-networking-helpers/healthchecker/cmd/healthchecker", "-race")
+	binPath, err = gexec.Build("code.cloudfoundry.org/healthchecker/cmd/healthchecker", "-race")
 	Expect(err).NotTo(HaveOccurred())
 }
 

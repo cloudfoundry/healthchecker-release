@@ -3,7 +3,6 @@ module code.cloudfoundry.org
 go 1.19
 
 require (
-	code.cloudfoundry.org/cf-networking-helpers v0.0.0-20230109130340-6b038be791db
 	code.cloudfoundry.org/lager v2.0.0+incompatible
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.24.2
