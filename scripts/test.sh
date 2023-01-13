@@ -6,7 +6,7 @@ set -e -u
 go version # so we see the version tested in CI
 
 if ! [ $(type -P "ginkgo") ]; then
- go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo@latest
+ go install -mod=mod github.com/onsi/ginkgo@v1
 fi
 
 SCRIPT_PATH="$(cd "$(dirname "${0}")" && pwd)"
