@@ -14,7 +14,5 @@ cd "${SCRIPT_PATH}/.."
 
 pushd src/code.cloudfoundry.org/healthchecker/cmd/healthchecker/
  ginkgo -r
- result=$?
 popd
 
-return "${result}"
