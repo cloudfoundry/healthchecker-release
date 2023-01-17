@@ -72,7 +72,7 @@ var _ = Describe("HealthChecker", func() {
 		})
 
 		It("fails with error", func() {
-			Eventually(session).ShouldNot(gexec.Exit(2))
+			Eventually(session).Should(gexec.Exit(2))
 			Expect(session.Err).To(gbytes.Say("Missing component_name"))
 		})
 	})
