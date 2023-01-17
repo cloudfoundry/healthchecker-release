@@ -12,7 +12,7 @@ fi
 SCRIPT_PATH="$(cd "$(dirname "${0}")" && pwd)"
 cd "${SCRIPT_PATH}/.."
 
-pushd src/code.cloudfoundry.org/healthchecker/cmd/healthchecker/
+pushd src/code.cloudfoundry.org/healthchecker/
  ginkgo -r
 popd
 
