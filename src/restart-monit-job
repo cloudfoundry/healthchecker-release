@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 
-JOB="${1}"
-FAILURE_COUNTER_FILE="${2}"
+JOB=$1
+FAILURE_COUNTER_FILE=$2
 
 PIDFILE="/var/vcap/sys/run/${JOB}/restart-${JOB}.pid"
 
 # As this script might run longer than a monit cycle (10s) and thus might be
 # triggered several times, it must be ensured that it runs only once.
-[[ -s "${PIDFILE}" ]] && exit
+[[ -s "$PIDFILE" ]] && exit
 
 function on_exit {
-    rm -f "${PIDFILE}"
+    rm -f $PIDFILE
 }
 
 trap on_exit EXIT
 
-echo "${BASHPID}" > "${PIDFILE}"
+echo "$BASHPID" > "$PIDFILE"
 
 LOGFILE="/var/vcap/sys/log/${JOB}/restart-${JOB}.log"
-echo "$(date) - pid: ${BASHPID} - Monit triggered restart" >> "${LOGFILE}"
+echo "$(date) - pid: $BASHPID - Monit triggered restart" >> "$LOGFILE"
 
 failure_counter="$(cat ${FAILURE_COUNTER_FILE})"
 
 if (( failure_counter < 10 )); then
   /var/vcap/bosh/bin/monit restart "${JOB}"
   sleep 1
-  echo "$(date) - pid: ${BASHPID} - Waiting for ${JOB} to be restarted" >> "${LOGFILE}"
+  echo "$(date) - pid: $BASHPID - Waiting for ${JOB} to be restarted" >> "$LOGFILE"
 
   until /var/vcap/bosh/bin/monit summary | grep "${JOB}" | grep -v healthchecker | grep running; do
     sleep 1
   done
   /var/vcap/bosh/bin/monit reload "%{JOB}-healthchecker"
-  echo "$(date) - pid: ${BASHPID} - ${JOB} was restarted" >> "${LOGFILE}"
+  echo "$(date) - pid: $BASHPID - ${JOB} was restarted" >> "$LOGFILE"
 else
-  echo "$(date) - pid: ${BASHPID} - 10 consecutive failures in a row. Stopping healthcheck to avoid constantly bringing down the main service." >> "${LOGFILE}"
+  echo "$(date) - pid: $BASHPID - 10 consecutive failures in a row. Stopping healthcheck to avoid constantly bringing down the main service." >> "${LOGFILE}"
   /var/vcap/bosh/bin/monit unmonitor "${JOB}-healthchecker"
 fi
