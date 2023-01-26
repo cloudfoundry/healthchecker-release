@@ -17,14 +17,21 @@ process downtime.
 
 ## Implementing in Your BOSH Release
 
-1. Vendor the healthchecker BOSH package in your boshrelease using a PREFIX. This will name the healthchecker package `${PREFIX}-healthchecker` in your release to prevent collisions.
-  1. ```
-  git clone https://github.com/cloudfoundry/healthchecker-release.git
-  cd ~/PATH/YOUR_RELEASE
-  bosh vendor-package healthchecker ~/workspace/healthchecker-release --prefix ${PREFIX}
-  ```
-1. Add `<job>-healthchecker` process to your job's monit file, based on our [example monit file](jobs/example/monit).
-1. Add BPM config for the healthchecker, based on our [example bpm.yml](jobs/example/templates/bpm.yml.erb).
-1. Add a healthchecker config template to your job based on our [example healthchecker config template](jobs/example/templates/healthchecker.yml.erb).
-1. Update the job's spec to add the healthchecker config template, healthchecker package,
-   and any new properties.
+#### 1. Vendor
+Vendor the healthchecker BOSH package in your boshrelease using a PREFIX. This will name the healthchecker package `${PREFIX}-healthchecker` in your release to prevent collisions.
+```
+git clone https://github.com/cloudfoundry/healthchecker-release.git
+cd ~/PATH/YOUR_RELEASE
+bosh vendor-package healthchecker ~/workspace/healthchecker-release --prefix ${PREFIX}
+```
+#### 2. Edit Monit File
+Add `<job>-healthchecker` process to the desired job's monit file, based on our [example monit file](jobs/example/monit).
+
+#### 3. BPM Config
+Add BPM config for the healthchecker, based on our [example bpm.yml](jobs/example/templates/bpm.yml.erb).
+
+#### 4. Healthchecker config
+Add a healthchecker config template to your job based on our [example healthchecker config template](jobs/example/templates/healthchecker.yml.erb).
+
+#### 5. Update job spec
+Update the job's spec to add the healthchecker config template, healthchecker package, and any new properties.
