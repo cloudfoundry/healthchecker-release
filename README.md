@@ -17,15 +17,15 @@ process downtime.
 
 ## Implementing in Your BOSH Release
 
-#### 1. Vendor
-Vendor the healthchecker BOSH package in your boshrelease using a PREFIX. This will name the healthchecker package `{PREFIX}-healthchecker` in your release to prevent collisions.
+#### 1. Vendor the `healthchecker` package
+Vendor the `healthchecker` BOSH package in your bosh release using a PREFIX. This will name the `healthchecker` package `{PREFIX}-healthchecker` in your release to prevent collisions.
 ```
 git clone https://github.com/cloudfoundry/healthchecker-release.git
 cd ~/PATH/YOUR_RELEASE
 bosh vendor-package healthchecker ~/workspace/healthchecker-release --prefix ${PREFIX}
 ```
 
-The PREFIX can be anything but should probably be the name of your release or a specific job in the release that will use healthchecker, e.g. `cf-networking` to make ``cf-networking-healthchecker`.
+The PREFIX can be anything but should probably be the name of your release or a specific job in the release that will use healthchecker, e.g. `cf-networking` to make `cf-networking-healthchecker`.
 Once the `healthchecker` package has been vendored into your release, any job in your release can make use of it by following the rest of the instructions.
 
 #### 2. Edit Monit File
