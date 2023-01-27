@@ -7,7 +7,13 @@ mv restart-monit-job ${BOSH_INSTALL_TARGET}/bin
 mv * ${BOSH_INSTALL_TARGET}/src
 mv ${BOSH_INSTALL_TARGET}/src .
 
-source /var/vcap/packages/golang-*-linux/bosh/compile.env
+
+PACKAGE_NAME=$(basename ${BOSH_INSTALL_TARGET})
+PREFIX=""
+if [[ ${PACKAGE_NAME} != healthchecker ]]; then
+    PREFIX=$(echo "${PACKAGE_NAME}" | sed "s|\(\w*\-\)healthchecker|\1|")
+fi
+source /var/vcap/packages/${PREFIX}golang-*-linux/bosh/compile.env
 
 export GOBIN=${BOSH_INSTALL_TARGET}/bin
 
