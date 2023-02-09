@@ -20,7 +20,7 @@ type HealthCheckEndpoint struct {
 var DefaultConfig = Config{
 	HealthCheckPollInterval:    10 * time.Second,
 	HealthCheckTimeout:         5 * time.Second,
-	StartResponseDelayInterval: 5 * time.Second,
+	StartResponseDelayInterval: 30 * time.Second,
 	StartupDelayBuffer:         5 * time.Second,
 	LogLevel:                   "info",
 }
