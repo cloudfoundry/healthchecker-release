@@ -17,67 +17,72 @@ type HealthCheckEndpoint struct {
 	Password string `yaml:"password"`
 }
 
-var DefaultConfig = Config{
-	HealthCheckPollInterval:    10 * time.Second,
-	HealthCheckTimeout:         5 * time.Second,
-	StartResponseDelayInterval: 5 * time.Second,
-	StartupDelayBuffer:         5 * time.Second,
-	LogLevel:                   "info",
+var defaultConfig = Config{
+	HealthCheckPollInterval: 10 * time.Second,
+	HealthCheckTimeout:      5 * time.Second,
+	StartupDelayBuffer:      5 * time.Second,
+	LogLevel:                "info",
+}
+
+func DefaultConfig() (*Config, error) {
+	c := defaultConfig
+	return &c, nil
 }
 
 type Config struct {
-	ComponentName              string              `yaml:"component_name"`
-	FailureCounterFile           string              `yaml:"failure_counter_file"`
-	HealthCheckEndpoint        HealthCheckEndpoint `yaml:"healthcheck_endpoint"`
-	HealthCheckPollInterval    time.Duration       `yaml:"healthcheck_poll_interval"`
-	HealthCheckTimeout         time.Duration       `yaml:"healthcheck_timeout"`
-	StartResponseDelayInterval time.Duration       `yaml:"start_response_delay_interval"`
-	StartupDelayBuffer         time.Duration       `yaml:"startup_delay_buffer"`
-	LogLevel                   string              `yaml:"log_level"`
+	ComponentName              string              `yaml:"component_name,omitempty"`
+	FailureCounterFile         string              `yaml:"failure_counter_file,omitempty"`
+	HealthCheckEndpoint        HealthCheckEndpoint `yaml:"healthcheck_endpoint,omitempty"`
+	HealthCheckPollInterval    time.Duration       `yaml:"healthcheck_poll_interval,omitempty"`
+	HealthCheckTimeout         time.Duration       `yaml:"healthcheck_timeout,omitempty"`
+	StartResponseDelayInterval time.Duration       `yaml:"start_response_delay_interval,omitempty"`
+	StartupDelayBuffer         time.Duration       `yaml:"startup_delay_buffer,omitempty"`
+	LogLevel                   string              `yaml:"log_level,omitempty"`
 }
 
-func LoadConfig(configFile string) (Config, error) {
+func LoadConfig(configFile string) (*Config, error) {
+	c, err := DefaultConfig()
+	if err != nil {
+		return nil, err
+	}
+
 	b, err := ioutil.ReadFile(configFile)
 	if err != nil {
-		return Config{}, fmt.Errorf("Could not read config file: %s, err: %s", configFile, err.Error())
+		return nil, fmt.Errorf("Could not read config file: %s, err: %s", configFile, err.Error())
 	}
-	var c Config
-	err = yaml.Unmarshal(b, &c)
+
+	err = c.Initialize(b)
 	if err != nil {
-		return Config{}, fmt.Errorf("Could not unmarshal config file: %s, err: %s", configFile, err.Error())
+		return nil, fmt.Errorf("Could not unmarshal config file: %s, err: %s", configFile, err.Error())
 	}
 
 	err = c.Validate()
 	if err != nil {
-		return Config{}, fmt.Errorf("Failed to validate config file: %s, err: %s", configFile, err.Error())
+		return nil, fmt.Errorf("Failed to validate config file: %s, err: %s", configFile, err.Error())
 	}
 
-	c.ApplyDefaults()
+	// c.ApplyDefaults()
 
 	return c, nil
 }
 
-func (c *Config) ApplyDefaults() {
-	if c.HealthCheckPollInterval == 0 {
-		c.HealthCheckPollInterval = DefaultConfig.HealthCheckPollInterval
-	}
+// func (c *Config) ApplyDefaults() {
+// 	if c.HealthCheckPollInterval == 0 {
+// 		c.HealthCheckPollInterval = defaultConfig.HealthCheckPollInterval
+// 	}
 
-	if c.HealthCheckTimeout == 0 {
-		c.HealthCheckTimeout = DefaultConfig.HealthCheckTimeout
-	}
+// 	if c.HealthCheckTimeout == 0 {
+// 		c.HealthCheckTimeout = defaultConfig.HealthCheckTimeout
+// 	}
 
-	if c.StartResponseDelayInterval == 0 {
-		c.StartResponseDelayInterval = DefaultConfig.StartResponseDelayInterval
-	}
+// 	if c.StartupDelayBuffer == 0 {
+// 		c.StartupDelayBuffer = defaultConfig.StartupDelayBuffer
+// 	}
 
-	if c.StartupDelayBuffer == 0 {
-		c.StartupDelayBuffer = DefaultConfig.StartupDelayBuffer
-	}
-
-	if c.LogLevel == "" {
-		c.LogLevel = DefaultConfig.LogLevel
-	}
-}
+// 	if c.LogLevel == "" {
+// 		c.LogLevel = defaultConfig.LogLevel
+// 	}
+// }
 
 func (c *Config) Validate() error {
 	if c.ComponentName == "" {
@@ -104,4 +109,8 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("Missing failure_counter_file")
 	}
 	return nil
+}
+
+func (c *Config) Initialize(configYAML []byte) error {
+	return yaml.Unmarshal(configYAML, &c)
 }

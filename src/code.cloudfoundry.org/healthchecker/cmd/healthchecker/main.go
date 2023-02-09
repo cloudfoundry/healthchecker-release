@@ -35,7 +35,10 @@ func main() {
 	logger, _ := lagerflags.NewFromConfig(c.ComponentName, logConfig)
 
 	startupDelay := c.StartResponseDelayInterval + c.StartupDelayBuffer
-	logger.Debug("Sleeping before gorouter responds to /health endpoint on startup", lager.Data{"sleep_time_seconds": startupDelay.Seconds()})
+	logger.Debug("Config", lager.Data{"Config": c})
+	logger.Debug("StartResponseDelayInterval", lager.Data{"StartResponseDelayInterval": time.Duration(c.StartResponseDelayInterval)})
+	logger.Debug("StartResponseDelayInterval_json", lager.Data{"StartResponseDelayInterval": c.StartResponseDelayInterval})
+	logger.Debug("Sleeping to allow target comonnent to start up", lager.Data{"sleep_time_seconds": startupDelay.Seconds()})
 	time.Sleep(startupDelay)
 
 	logger.Info("Starting")

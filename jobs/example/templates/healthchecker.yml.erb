@@ -7,6 +7,7 @@ config = {
     'host' => p('address'),
     'port' => p('port'),
     'path' => '/health',
+  'start_response_delay_interval' => String(p('healthchecker.start_response_delay_interval')) + 's',
   },
   # Defaults for other params:
   #'start_response_delay_interval' => '5s',
