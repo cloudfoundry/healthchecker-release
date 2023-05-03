@@ -154,11 +154,11 @@ var _ = Describe("Watchdog", func() {
 					ctx, cancel := context.WithTimeout(context.Background(), 10*pollInterval)
 					defer cancel()
 					dog.WatchHealthcheckEndpoint(ctx, signals)
-					Eventually(func() {
+					Eventually(func() string {
 						content, err := os.ReadFile(failureCounterFile.Name())
 						Expect(err).NotTo(HaveOccurred())
-						Expect(string(content)).To(Equal("0\n"))
-					}).Should(Succeed())
+						return string(content)
+					}).Should(Equal("0\n"))
 				})
 			})
 
