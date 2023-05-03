@@ -11,9 +11,7 @@ import (
 	"code.cloudfoundry.org/healthchecker/watchdog"
 	"code.cloudfoundry.org/lager"
 	"code.cloudfoundry.org/lager/lagertest"
-	"github.com/onsi/ginkgo"
-	. "github.com/onsi/ginkgo"
-	"github.com/onsi/gomega"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
@@ -50,7 +48,7 @@ var _ = Describe("Watchdog", func() {
 	}
 
 	BeforeEach(func() {
-		addr = fmt.Sprintf("localhost:%d", 9850+ginkgo.GinkgoParallelProcess())
+		addr = fmt.Sprintf("localhost:%d", 9850+GinkgoParallelProcess())
 		pollInterval = 10 * time.Millisecond
 		logger = lagertest.NewTestLogger("watchdog")
 	})
@@ -156,10 +154,10 @@ var _ = Describe("Watchdog", func() {
 					ctx, cancel := context.WithTimeout(context.Background(), 10*pollInterval)
 					defer cancel()
 					dog.WatchHealthcheckEndpoint(ctx, signals)
-					Eventually(func(g gomega.Gomega) {
+					Eventually(func() {
 						content, err := os.ReadFile(failureCounterFile.Name())
-						g.Expect(err).NotTo(HaveOccurred())
-						g.Expect(string(content)).To(Equal("0\n"))
+						Expect(err).NotTo(HaveOccurred())
+						Expect(string(content)).To(Equal("0\n"))
 					}).Should(Succeed())
 				})
 			})
