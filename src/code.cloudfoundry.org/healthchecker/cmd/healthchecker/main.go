@@ -11,8 +11,8 @@ import (
 
 	"code.cloudfoundry.org/healthchecker/config"
 	"code.cloudfoundry.org/healthchecker/watchdog"
-	"code.cloudfoundry.org/lager"
-	"code.cloudfoundry.org/lager/lagerflags"
+	"code.cloudfoundry.org/lager/v3"
+	"code.cloudfoundry.org/lager/v3/lagerflags"
 )
 
 const (
