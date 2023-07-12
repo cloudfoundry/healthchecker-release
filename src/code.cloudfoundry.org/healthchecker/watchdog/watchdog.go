@@ -34,6 +34,7 @@ func NewWatchdog(u *url.URL, componentName string, failureCounterFileName string
 	}
 	if strings.HasPrefix(u.Host, "unix") {
 		socket := strings.TrimPrefix(u.Host, "unix")
+		u.Host = "unix"
 		client.Transport = &http.Transport{
 			DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
 				return net.Dial("unix", socket)

@@ -3,6 +3,7 @@ package watchdog_test
 import (
 	"context"
 	"fmt"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
@@ -76,6 +77,30 @@ var _ = Describe("Watchdog", func() {
 
 			_, err = os.ReadFile(failureCounterFileName)
 			Expect(err).ToNot(HaveOccurred())
+		})
+
+		Context("When querying a unix socket", func() {
+			var unixSocket *os.File
+			JustBeforeEach(func() {
+				var err error
+				unixSocket, err = os.CreateTemp("", "ghttpUnixSocket.*")
+				Expect(err).NotTo(HaveOccurred())
+				err = os.Remove(unixSocket.Name())
+				Expect(err).NotTo(HaveOccurred())
+
+				u.Host = fmt.Sprintf("unix%s", unixSocket.Name())
+
+				_, err = net.Listen("unix", unixSocket.Name())
+				Expect(err).NotTo(HaveOccurred())
+			})
+
+			It("Doesn't set an invalid host header on the HTTP request", func() {
+				dog = watchdog.NewWatchdog(u, "some-component", failureCounterFileName, pollInterval, healthcheckTimeout, logger)
+				Expect(dog).ToNot(BeNil())
+
+				err := dog.HitHealthcheckEndpoint()
+				Expect(err).ToNot(MatchError(ContainSubstring("invalid URL")))
+			})
 		})
 	})
 
