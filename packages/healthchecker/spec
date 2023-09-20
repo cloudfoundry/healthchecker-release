@@ -8,5 +8,16 @@ files:
   - code.cloudfoundry.org/go.mod
   - code.cloudfoundry.org/go.sum
   - code.cloudfoundry.org/vendor/modules.txt
-  - code.cloudfoundry.org/**/*.go
   - restart-monit-job
+  - code.cloudfoundry.org/healthchecker/cmd/healthchecker/*.go # gosub
+  - code.cloudfoundry.org/healthchecker/config/*.go # gosub
+  - code.cloudfoundry.org/healthchecker/watchdog/*.go # gosub
+  - code.cloudfoundry.org/vendor/code.cloudfoundry.org/lager/v3/*.go # gosub
+  - code.cloudfoundry.org/vendor/code.cloudfoundry.org/lager/v3/internal/truncate/*.go # gosub
+  - code.cloudfoundry.org/vendor/code.cloudfoundry.org/lager/v3/lagerflags/*.go # gosub
+  - code.cloudfoundry.org/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
+  - code.cloudfoundry.org/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
+  - code.cloudfoundry.org/vendor/golang.org/x/sys/internal/unsafeheader/*.go # gosub
+  - code.cloudfoundry.org/vendor/golang.org/x/sys/windows/*.go # gosub
+  - code.cloudfoundry.org/vendor/golang.org/x/sys/windows/*.s # gosub
+  - code.cloudfoundry.org/vendor/gopkg.in/yaml.v2/*.go # gosub
