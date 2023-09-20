@@ -3,6 +3,7 @@ package watchdog_test
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"net"
 	"net/http"
 	"net/url"
@@ -15,6 +16,16 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+func randStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
+}
 
 var _ = Describe("Watchdog", func() {
 	var (
@@ -58,7 +69,7 @@ var _ = Describe("Watchdog", func() {
 		var failureCounterFileName string
 
 		JustBeforeEach(func() {
-			failureCounterFileName = "potatoes"
+			failureCounterFileName = fmt.Sprintf("%s-%d", randStringBytes(25), GinkgoParallelProcess())
 			u, err = url.Parse("http://" + addr + "/healthz")
 			Expect(err).ToNot(HaveOccurred())
 		})
