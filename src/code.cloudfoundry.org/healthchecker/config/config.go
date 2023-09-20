@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"time"
 
 	"gopkg.in/yaml.v2"
@@ -27,7 +27,7 @@ var DefaultConfig = Config{
 
 type Config struct {
 	ComponentName              string              `yaml:"component_name"`
-	FailureCounterFile           string              `yaml:"failure_counter_file"`
+	FailureCounterFile         string              `yaml:"failure_counter_file"`
 	HealthCheckEndpoint        HealthCheckEndpoint `yaml:"healthcheck_endpoint"`
 	HealthCheckPollInterval    time.Duration       `yaml:"healthcheck_poll_interval"`
 	HealthCheckTimeout         time.Duration       `yaml:"healthcheck_timeout"`
@@ -37,7 +37,7 @@ type Config struct {
 }
 
 func LoadConfig(configFile string) (Config, error) {
-	b, err := ioutil.ReadFile(configFile)
+	b, err := os.ReadFile(configFile)
 	if err != nil {
 		return Config{}, fmt.Errorf("Could not read config file: %s, err: %s", configFile, err.Error())
 	}
