@@ -30,7 +30,7 @@ var HealthCheckerBeforeEach = func() {
 		HealthCheckPollInterval:    1 * time.Millisecond,
 		HealthCheckTimeout:         1 * time.Millisecond,
 	}
-	binPath, err = gexec.Build("code.cloudfoundry.org/healthchecker/cmd/healthchecker", "-race")
+	binPath, err = gexec.Build("code.cloudfoundry.org/healthchecker/cmd/healthchecker", "-race", "-buildvcs=false")
 	Expect(err).NotTo(HaveOccurred())
 }
 
