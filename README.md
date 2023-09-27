@@ -56,3 +56,20 @@ Based on the example, you need to add:
 - [package itself](jobs/example/spec#L10)
   - *Important*: this *MUST* match the PREFIX used when vendoring, i.e. `{PREFIX}-healthchecker`
 - [`failure_counter_file` property](jobs/example/spec#L25-L27)
+
+#### <a name="running-unit-and-integration-tests"></a> Running Unit and Integration Tests
+
+##### With Docker
+
+Running tests for this release
+
+- `./scripts/create-docker-container.bash`: This will create a docker container with appropriate mounts.
+- `./scripts/test-in-docker-locally.bash`: Create docker container and run all tests and setup in a single script.
+  - `./scripts/test-in-docker-locally.bash <package> <sub-package>`: For running tests under a specific package and/or sub-package: e.g. `./scripts/test-in-docker-locally.bash healthchcker watchdog`
+
+When inside docker container: 
+- `/repo/scripts/docker/test.bash`: This will run all tests in this release
+- `/repo/scripts/docker/test.bash healthchcker`: This will only run `healthchckers` tests
+- `/repo/scripts/docker/test.bash healthchcker integration`: This will only run `watchdog` sub-package tests for `healthchcker` package
+- `/repo/scripts/docker/tests-templates.bash`: This will run all of tests for bosh tempalates
+- `/repo/scripts/docker/lint.bash`: This will run all of linting defined for this repo.
