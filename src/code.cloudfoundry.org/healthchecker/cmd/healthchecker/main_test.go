@@ -89,10 +89,9 @@ var _ = Describe("HealthChecker", func() {
 		})
 	})
 
-	Context("when there is a tcp server running", func() {
+	Context("when doing http based checks", func() {
 		var server *ghttp.Server
-		BeforeEach(func() {
-			server = ghttp.NewServer()
+		JustBeforeEach(func() {
 			server.RouteToHandler(
 				"GET", "/some-path",
 				ghttp.RespondWith(200, "ok"),
@@ -101,6 +100,7 @@ var _ = Describe("HealthChecker", func() {
 			Expect(err).NotTo(HaveOccurred())
 
 			cfg.HealthCheckEndpoint.Host = u.Hostname()
+			cfg.HealthCheckEndpoint.Scheme = u.Scheme
 			port, err := strconv.Atoi(u.Port())
 			Expect(err).NotTo(HaveOccurred())
 			cfg.HealthCheckEndpoint.Port = port
@@ -109,15 +109,31 @@ var _ = Describe("HealthChecker", func() {
 			cfg.StartupDelayBuffer = 5 * time.Second
 			cfg.HealthCheckPollInterval = 500 * time.Millisecond
 			cfg.HealthCheckTimeout = 5 * time.Second
+			HealthCheckerJustBeforeEach()
 		})
 
 		AfterEach(func() {
 			server.Close()
 		})
 
-		It("works", func() {
-			Eventually(session.Out, 10*time.Second).Should(gbytes.Say("Verifying endpoint"))
-			Eventually(func() int { return len(server.ReceivedRequests()) }, 10*time.Second).Should(BeNumerically(">", 0))
+		Context("when there is a non-tls server running", func() {
+			BeforeEach(func() {
+				server = ghttp.NewServer()
+			})
+
+			It("works", func() {
+				Eventually(session.Out, 10*time.Second).Should(gbytes.Say("Verifying endpoint"))
+				Eventually(func() int { return len(server.ReceivedRequests()) }, 10*time.Second).Should(BeNumerically(">", 0))
+			})
+		})
+		Context("when there is a tcp server running", func() {
+			BeforeEach(func() {
+				server = ghttp.NewTLSServer()
+			})
+			It("works", func() {
+				Eventually(session.Out, 10*time.Second).Should(gbytes.Say("Verifying endpoint"))
+				Eventually(func() int { return len(server.ReceivedRequests()) }, 10*time.Second).Should(BeNumerically(">", 0))
+			})
 		})
 	})
 })

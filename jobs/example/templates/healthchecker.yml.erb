@@ -6,6 +6,7 @@ config = {
   'healthcheck_endpoint' => {
     'host' => p('address'),
     'port' => p('port'),
+    'scheme' => p('scheme'),
     'path' => '/health',
   },
   # Defaults for other params:
@@ -13,6 +14,7 @@ config = {
   #'startup_delay_buffer' => '5s',
   #'healthcheck_poll_interval' => '10s',
   #'healthcheck_timeout' => '5s',
+  #'healthcheck_endpoint.scheme' => 'http',
 }
 
 config.to_yaml

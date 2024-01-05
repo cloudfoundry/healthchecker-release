@@ -18,6 +18,10 @@ properties:
     description: "Port which the example job will listen on."
     default: 8053
 
+  scheme:
+    description: "URL scheme to use when doing http checks (http/https)"
+    default: https
+
   log_level:
     description: "Log level"
     default: info
