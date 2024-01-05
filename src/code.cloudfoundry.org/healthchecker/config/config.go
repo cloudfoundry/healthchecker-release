@@ -10,6 +10,7 @@ import (
 
 type HealthCheckEndpoint struct {
 	Socket   string `yaml:"socket"`
+	Scheme   string `yaml:"scheme"`
 	Host     string `yaml:"host"`
 	Port     int    `yaml:"port"`
 	Path     string `yaml:"path"`
@@ -18,8 +19,11 @@ type HealthCheckEndpoint struct {
 }
 
 var DefaultConfig = Config{
-	HealthCheckPollInterval:    10 * time.Second,
-	HealthCheckTimeout:         5 * time.Second,
+	HealthCheckPollInterval: 10 * time.Second,
+	HealthCheckTimeout:      5 * time.Second,
+	HealthCheckEndpoint: HealthCheckEndpoint{
+		Scheme: "http",
+	},
 	StartResponseDelayInterval: 30 * time.Second,
 	StartupDelayBuffer:         5 * time.Second,
 	LogLevel:                   "info",
@@ -76,6 +80,9 @@ func (c *Config) ApplyDefaults() {
 
 	if c.LogLevel == "" {
 		c.LogLevel = DefaultConfig.LogLevel
+	}
+	if c.HealthCheckEndpoint.Scheme == "" {
+		c.HealthCheckEndpoint.Scheme = DefaultConfig.HealthCheckEndpoint.Scheme
 	}
 }
 

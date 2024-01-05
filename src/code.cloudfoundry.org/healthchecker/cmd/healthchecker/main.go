@@ -41,7 +41,7 @@ func main() {
 	logger.Info("Starting")
 
 	u := &url.URL{
-		Scheme: "http",
+		Scheme: c.HealthCheckEndpoint.Scheme,
 		Host:   fmt.Sprintf("%s:%d", c.HealthCheckEndpoint.Host, c.HealthCheckEndpoint.Port),
 		User:   url.UserPassword(c.HealthCheckEndpoint.User, c.HealthCheckEndpoint.Password),
 		Path:   c.HealthCheckEndpoint.Path,

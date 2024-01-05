@@ -2,6 +2,7 @@ package watchdog
 
 import (
 	"context"
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"net"
@@ -31,6 +32,11 @@ type Watchdog struct {
 func NewWatchdog(u *url.URL, componentName string, failureCounterFileName string, pollInterval time.Duration, healthcheckTimeout time.Duration, logger lager.Logger) *Watchdog {
 	client := http.Client{
 		Timeout: healthcheckTimeout,
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
 	}
 	if strings.HasPrefix(u.Host, "unix") {
 		socket := strings.TrimPrefix(u.Host, "unix")

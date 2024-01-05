@@ -46,6 +46,7 @@ var _ = Describe("Config", func() {
 						User:     "some-user",
 						Password: "some-password",
 						Path:     "/some-path",
+						Scheme:   "https",
 					},
 					HealthCheckPollInterval:    3 * time.Minute,
 					HealthCheckTimeout:         4 * time.Hour,
@@ -185,6 +186,7 @@ var _ = Describe("Config", func() {
 				Expect(c.StartResponseDelayInterval).To(Equal(config.DefaultConfig.StartResponseDelayInterval))
 				Expect(c.StartupDelayBuffer).To(Equal(config.DefaultConfig.StartupDelayBuffer))
 				Expect(c.LogLevel).To(Equal(config.DefaultConfig.LogLevel))
+				Expect(c.HealthCheckEndpoint.Scheme).To(Equal("http"))
 			})
 		})
 
