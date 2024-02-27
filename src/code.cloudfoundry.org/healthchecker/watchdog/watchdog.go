@@ -3,7 +3,6 @@ package watchdog
 import (
 	"context"
 	"crypto/tls"
-	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -126,9 +125,9 @@ func (w *Watchdog) HitHealthcheckEndpoint() error {
 	}
 
 	if response.StatusCode != http.StatusOK {
-		return errors.New(fmt.Sprintf(
+		return fmt.Errorf(
 			"%v received from healthcheck endpoint (200 expected)",
-			response.StatusCode))
+			response.StatusCode)
 	}
 	return nil
 }
