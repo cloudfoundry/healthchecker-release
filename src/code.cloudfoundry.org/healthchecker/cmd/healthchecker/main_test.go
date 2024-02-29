@@ -1,7 +1,6 @@
 package main_test
 
 import (
-	"io/ioutil"
 	"net/url"
 	"os"
 	"os/exec"
@@ -36,7 +35,7 @@ var HealthCheckerBeforeEach = func() {
 
 var HealthCheckerJustBeforeEach = func() {
 	var err error
-	configFile, err = ioutil.TempFile("", "healthchecker.config")
+	configFile, err = os.CreateTemp("", "healthchecker.config")
 	Expect(err).NotTo(HaveOccurred())
 
 	cfgBytes, err := yaml.Marshal(cfg)
