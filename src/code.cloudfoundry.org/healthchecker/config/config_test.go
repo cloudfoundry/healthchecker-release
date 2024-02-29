@@ -1,7 +1,6 @@
 package config_test
 
 import (
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -20,7 +19,7 @@ var _ = Describe("Config", func() {
 
 	JustBeforeEach(func() {
 		var err error
-		configFile, err = ioutil.TempFile("", "healthchecker.config")
+		configFile, err = os.CreateTemp("", "healthchecker.config")
 		Expect(err).NotTo(HaveOccurred())
 
 		cfgBytes, err := yaml.Marshal(cfgInFile)
@@ -200,7 +199,7 @@ var _ = Describe("Config", func() {
 
 		Context("when config file is malformed", func() {
 			It("returns an error", func() {
-				configFile, err := ioutil.TempFile("", "healthchecker-malformed.config")
+				configFile, err := os.CreateTemp("", "healthchecker-malformed.config")
 				Expect(err).NotTo(HaveOccurred())
 
 				_, err = configFile.WriteString("meow")
