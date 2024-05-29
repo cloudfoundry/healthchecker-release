@@ -7,6 +7,10 @@ releases. Since the version of `monit` included in BOSH does not support
 specific tcp/http health checks, we designed this utility to perform
 health checking and restart processes if they become unreachable.
 
+# Docs
+
+-   [How to use](./docs/01-how-to-use.md)
+
 # Contributing
 
 See the [Contributing.md](./.github/CONTRIBUTING.md) for more
@@ -17,10 +21,6 @@ information on how to contribute.
 This repository is maintained by [App Runtime
 Platform](https://github.com/cloudfoundry/community/blob/main/toc/working-groups/app-runtime-platform.md)
 under `Networking` area.
-
-# Docs
-
--   [How to use](./docs/01-how-to-use.md)
 
 > \[!IMPORTANT\]
 >
