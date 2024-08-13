@@ -3,7 +3,7 @@ module code.cloudfoundry.org
 go 1.19
 
 require (
-	code.cloudfoundry.org/lager/v3 v3.0.3
+	code.cloudfoundry.org/lager/v3 v3.1.0
 	github.com/onsi/ginkgo/v2 v2.20.0
 	github.com/onsi/gomega v1.34.1
 	golang.org/x/sys v0.24.0
