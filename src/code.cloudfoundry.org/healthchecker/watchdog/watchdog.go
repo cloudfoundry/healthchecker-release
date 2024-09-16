@@ -52,6 +52,7 @@ func NewWatchdog(u *url.URL, componentName string, failureCounterFileName string
 		logger.Fatal("cannot-create-failure-counter-file", err)
 		return nil
 	}
+	// #gosec G104 - its ok if we don't catch closing this file. The important bit is that we created it
 	failureCounterFile.Close()
 
 	return &Watchdog{
