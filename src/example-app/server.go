@@ -11,13 +11,16 @@ func main() {
 	fmt.Println("listening...")
 
 	port := os.Getenv("PORT")
-
-	err := http.ListenAndServe(":"+port, nil)
+	server := &http.Server{
+		Addr:    fmt.Sprintf(":%s", port),
+		Handler: nil,
+	}
+	err := server.ListenAndServe()
 	if err != nil {
 		panic(err)
 	}
 }
 
-func hello(res http.ResponseWriter, req *http.Request) {
+func hello(res http.ResponseWriter, _ *http.Request) {
 	fmt.Fprintf(res, "Hello")
 }
