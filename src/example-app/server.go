@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -12,8 +13,9 @@ func main() {
 
 	port := os.Getenv("PORT")
 	server := &http.Server{
-		Addr:    fmt.Sprintf(":%s", port),
-		Handler: nil,
+		Addr:              fmt.Sprintf(":%s", port),
+		Handler:           nil,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 	err := server.ListenAndServe()
 	if err != nil {
