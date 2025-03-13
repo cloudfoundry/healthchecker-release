@@ -1,5 +1,5 @@
-code.cloudfoundry.org/lager/v3 v3.28.0 h1:SypXJGyBHVXkJFN3mgj5ndwMSP0IR+iE9vvaIaYvlL0=
-code.cloudfoundry.org/lager/v3 v3.28.0/go.mod h1:k4G2PFGK6R46i8v4+Cv9LjCCWl4OkOFahfEi1WlhYic=
+code.cloudfoundry.org/lager/v3 v3.29.0 h1:i+ZL7xoY0QnY90T0SlaAuWXyh068AlAVq6+vLC4A+Vo=
+code.cloudfoundry.org/lager/v3 v3.29.0/go.mod h1:QbdZLEQ0aUe2uPbcoVPRztY7zC8Ff3Eg577vhgdZZ5A=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
