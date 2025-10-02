@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.6
 
 require (
-	code.cloudfoundry.org/lager/v3 v3.49.0
+	code.cloudfoundry.org/lager/v3 v3.50.0
 	github.com/onsi/ginkgo/v2 v2.25.3
 	github.com/onsi/gomega v1.38.2
 	golang.org/x/sys v0.36.0
