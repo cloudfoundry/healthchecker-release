@@ -5,8 +5,8 @@ go 1.24.0
 toolchain go1.24.6
 
 require (
-	code.cloudfoundry.org/lager/v3 v3.52.0
-	github.com/onsi/ginkgo/v2 v2.27.1
+	code.cloudfoundry.org/lager/v3 v3.53.0
+	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
 	golang.org/x/sys v0.37.0
 	gopkg.in/yaml.v2 v2.4.0
@@ -19,7 +19,6 @@ require (
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/pprof v0.0.0-20251007162407-5df77e3f7d1d // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
-	go.uber.org/automaxprocs v1.6.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/mod v0.29.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
