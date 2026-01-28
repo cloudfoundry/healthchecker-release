@@ -1,0 +1,35 @@
+name: healthchecker
+version: 0.59.0
+commit_hash: b5ca9ac
+uncommitted_changes: false
+jobs:
+- name: example
+  version: f5fb4a005e2bb08a68a2fd10e006c33e7344507eee49e70dbcc9a4971ee67703
+  fingerprint: f5fb4a005e2bb08a68a2fd10e006c33e7344507eee49e70dbcc9a4971ee67703
+  sha1: sha256:f0927bf755137f6144e7d7a8edf3b60bdcdbea3fb8a55df87289db6d040eb6fd
+  packages:
+  - example-app
+  - healthchecker
+packages:
+- name: example-app
+  version: 4f6e2a043c135ff7e3fce9e6cb5c0233b0f2e0b0b457d72f2e69f885f0bd73e0
+  fingerprint: 4f6e2a043c135ff7e3fce9e6cb5c0233b0f2e0b0b457d72f2e69f885f0bd73e0
+  sha1: sha256:4ce500c5904f20b876f6eb844ee8b32dfe64784ac94626e3d0ec7de8b4dbfbbe
+  dependencies:
+  - golang-1.25-linux
+- name: golang-1.25-linux
+  version: 55ba20c67a47d3cee41903d151c5d5a6f995badc027ac767a1a020e2efb2be9b
+  fingerprint: 55ba20c67a47d3cee41903d151c5d5a6f995badc027ac767a1a020e2efb2be9b
+  sha1: sha256:89ec9fc776b330db38487ea42e67c3cd81fbe90b8b92ae29830a1ae113d9534f
+  dependencies: []
+- name: healthchecker
+  version: b0f01d8a491721727fd08b95df410e8986ba4d5c2af984d8466628cb0d39e0f3
+  fingerprint: b0f01d8a491721727fd08b95df410e8986ba4d5c2af984d8466628cb0d39e0f3
+  sha1: sha256:d1cf657efcd55a2fcde1ad4ccbff1a4ba9bbcb607fdb53d41f9f2c95a0150b81
+  dependencies:
+  - golang-1.25-linux
+license:
+  version: 891b8bda1d69954479cf3be983cc9f42bb24a6d5f2d53579288d97ab90fe8f2b
+  fingerprint: 891b8bda1d69954479cf3be983cc9f42bb24a6d5f2d53579288d97ab90fe8f2b
+  sha1: sha256:ddfd6946596228a7bc69a8ba7bc6c83bc6925d8aae614cbb499cb62b314edcbb
+no_compression: false
