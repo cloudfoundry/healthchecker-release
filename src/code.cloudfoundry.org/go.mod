@@ -3,7 +3,7 @@ module code.cloudfoundry.org
 go 1.25.0
 
 require (
-	code.cloudfoundry.org/lager/v3 v3.63.0
+	code.cloudfoundry.org/lager/v3 v3.64.0
 	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
 	golang.org/x/sys v0.42.0
@@ -22,6 +22,6 @@ require (
 	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
-	golang.org/x/tools v0.42.0 // indirect
+	golang.org/x/tools v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
