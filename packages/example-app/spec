@@ -2,7 +2,7 @@
 name: example-app
 
 dependencies:
-  - golang-1.26-linux
+  - golang-1.27-linux
 
 files:
   - example-app/*
